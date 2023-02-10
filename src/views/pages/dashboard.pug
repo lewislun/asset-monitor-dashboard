@@ -1,0 +1,8 @@
+extends ../layouts/base.pug
+include ../mixins/charts.pug
+
+block body
+	script(src='https://cdn.jsdelivr.net/npm/apexcharts')
+	+pieChart(totalValueByStateData)
+	+pieChart(totalValueByCodeData)
+	+pieChart(totalValueByChainData)

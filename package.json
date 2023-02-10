@@ -4,13 +4,19 @@
   "description": "",
   "main": "index.js",
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "watch": "pm2 delete ecosystem.config.cjs && pm2 start ecosystem.config.cjs --only asset-monitor-dashboard-dev"
+  },
   "author": "Lewis Cheung",
   "license": "MIT",
   "dependencies": {
+    "asset-monitor": "git+ssh://git@github.com:lewislun/asset-monitor.git#1.1.0",
+    "decimal.js": "^10.4.3",
     "express": "^4.18.2",
     "js-yaml": "^4.1.0",
+    "knex": "^2.4.2",
     "morgan": "^1.10.0",
+    "objection": "^3.0.1",
     "pug": "^3.0.2",
     "winston": "^3.8.2"
   },

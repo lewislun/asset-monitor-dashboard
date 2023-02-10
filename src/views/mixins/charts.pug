@@ -1,0 +1,13 @@
+
+mixin pieChart(data)
+	- chainCount = chainCount === undefined? 0 : chainCount
+	- const chartId = `chart-${chainCount++}`
+	div(id=chartId)
+	script.
+		data = !{JSON.stringify(data)}
+		chartId = '#!{chartId}'
+		chartOpts = {
+			...data,
+			chart: { type: 'pie' }
+		}
+		new ApexCharts(document.querySelector(chartId), chartOpts).render()
