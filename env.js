@@ -3,7 +3,7 @@ import path from 'path'
 
 import yaml from 'js-yaml'
 
-import { createLogger } from './utils/index.js'
+import { createLogger } from './src/utils/index.js'
 
 // load file
 const logger = createLogger('env')
@@ -13,7 +13,14 @@ const envObj = yaml.load(fs.readFileSync(envFilePath, 'utf8'))
 logger.info(`Environment file loaded successfully.`)
 
 export default {
+    /** @type {string} */
     APP_NAME: envObj.appName ?? 'undefined',
+    /** @type {number} */
     PORT: envObj.port ?? 3000,
+    /** @type {string} */
     PUBLIC_FOLDER_PATH: envObj.publicFolderPath ?? 'public',
+    /** @type {string} */
+    SCSS_DIST_PATH: envObj.scssDistPath ?? undefined,
+    /** @type {string} */
+    SCSS_ENTRY_PATH: envObj.scssEntryPath ?? undefined,
 }

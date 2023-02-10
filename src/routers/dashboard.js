@@ -2,7 +2,7 @@ import express from 'express'
 import { analytics } from 'asset-monitor'
 
 import { parseApexLabelValueData } from '../utils/index.js'
-import env from '../env.js'
+import env from '../../env.js'
 
 const router = express.Router()
 
