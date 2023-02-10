@@ -1,8 +1,13 @@
-extends ../layouts/base.pug
-include ../mixins/charts.pug
+extends ../../layouts/base.pug
+include ../../mixins/charts.pug
 
 block body
 	script(src='https://cdn.jsdelivr.net/npm/apexcharts')
-	+apexPieChart(totalValueByStateData)
-	+apexPieChart(totalValueByCodeData)
-	+apexPieChart(totalValueByChainData)
+	.container
+		.row
+			+chartCard('Total Value by State')
+				+apexPieChart(totalValueByStateData)
+			+chartCard('Total Value by Code')
+				+apexPieChart(totalValueByCodeData)
+			+chartCard('Total Value by Chain')
+				+apexPieChart(totalValueByChainData)

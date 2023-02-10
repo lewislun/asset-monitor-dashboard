@@ -15,4 +15,5 @@ logger.info(`Environment file loaded successfully.`)
 export default {
     APP_NAME: envObj.appName ?? 'undefined',
     PORT: envObj.port ?? 3000,
+    PUBLIC_FOLDER_PATH: envObj.publicFolderPath ?? 'public',
 }
