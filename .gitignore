@@ -11,6 +11,9 @@ knexfile.js
 /ecosystem.config*
 !/ecosystem.config.template.cjs
 
+# dist files
+dist
+
 # environment config
 /env*.yaml
 !/env.template.yaml
