@@ -14,9 +14,9 @@ router.get('/', async (req, res) => {
 	])
 	res.render('pages/dashboard/summary', {
 		env,
-		totalValueByStateData: parseApexLabelValueData(totalValueByStateData, 'state', 'usdValue'),
-		totalValueByCodeData: parseApexXYData(totalValueByCodeData, 'code', 'usdValue'),
-		totalValueByChainData: parseApexLabelValueData(totalValueByChainData, 'chain', 'usdValue')
+		totalValueByStateData: parseApexLabelValueData(totalValueByStateData, 'state', 'usdValue', { sortField: 'usdValue' }),
+		totalValueByCodeData: parseApexXYData(totalValueByCodeData, 'code', 'usdValue', { sortField: 'usdValue' }),
+		totalValueByChainData: parseApexLabelValueData(totalValueByChainData, 'chain', 'usdValue', { sortField: 'usdValue' })
 	})
 })
 

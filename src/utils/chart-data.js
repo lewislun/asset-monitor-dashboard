@@ -5,17 +5,28 @@ import Decimal from 'decimal.js'
  */
 
 /**
+ * @enum {string}
+ */
+export const SortOrder = {
+	ASC: 'asc',
+	DESC: 'desc',
+}
+
+/**
  * @param {object[]} dataArr
- * @param {string} xFieldName
- * @param {string} yFieldName
+ * @param {string} xField
+ * @param {string} yField
  * @param {object} [opts={}]
- * @param {object} [xAxisType=category]
+ * @param {object} [opts.xAxisType=category]
+ * @param {string} [opts.sortField]
+ * @param {SortOrder} [opts.sortOrder=desc]
  * @returns {ApexOptions}
  */
-export function parseApexXYData(dataArr, xFieldName, yFieldName, opts = {}) {
+export function parseApexXYData(dataArr, xField, yField, opts = {}) {
+	if (opts?.sortField) sortArr(dataArr, opts.sortField, opts.sortOrder)
 	return {
 		series: [{
-			data: dataArr.map(item => ({ x: parseValue(item[xFieldName]), y: parseValue(item[yFieldName]) })),
+			data: dataArr.map(item => ({ x: parseValue(item[xField]), y: parseValue(item[yField]) })),
 		}],
 		xaxis: { type: opts?.xAxisType ?? 'category' },
 	}
@@ -24,14 +35,34 @@ export function parseApexXYData(dataArr, xFieldName, yFieldName, opts = {}) {
 /**
  * Data for Pie/Donuts/RadialBars.
  * @param {object[]} dataArr
- * @param {string} labelFieldName
- * @param {string} valueFieldName
- * @returns {}
+ * @param {string} labelField
+ * @param {string} valueField
+ * @param {object} [opts={}]
+ * @param {string} [opts.sortField]
+ * @param {SortOrder} [opts.sortOrder=desc]
+ * @returns {ApexOptions}
  */
-export function parseApexLabelValueData(dataArr, labelFieldName, valueFieldName) {
+export function parseApexLabelValueData(dataArr, labelField, valueField, opts = {}) {
+	if (opts?.sortField) sortArr(dataArr, opts.sortField, opts.sortOrder)
 	return {
-		series: dataArr.map(item => parseValue(item[valueFieldName])),
-		labels: dataArr.map(item => parseValue(item[labelFieldName])),
+		series: dataArr.map(item => parseValue(item[valueField])),
+		labels: dataArr.map(item => parseValue(item[labelField])),
+	}
+}
+
+/**
+ * This function mutates the array.
+ * @template T
+ * @param {T[]} arr
+ * @param {string} field
+ * @param {SortOrder} [order=desc]
+ * @returns {T[]}
+ */
+function sortArr(arr, field, order = SortOrder.DESC) {
+	if (order === SortOrder.ASC) {
+		return arr.sort((a, b) => a[field] - b[field])
+	} else {
+		return arr.sort((a, b) => b[field] - a[field])
 	}
 }
 
