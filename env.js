@@ -19,8 +19,13 @@ export default {
     PORT: envObj.port ?? 3000,
     /** @type {string} */
     PUBLIC_FOLDER_PATH: envObj.publicFolderPath ?? 'public',
+
+    /** @type {string} */
+    SCSS_ENTRY_PATH: envObj.scssEntryPath ?? undefined,
     /** @type {string} */
     SCSS_DIST_PATH: envObj.scssDistPath ?? undefined,
     /** @type {string} */
-    SCSS_ENTRY_PATH: envObj.scssEntryPath ?? undefined,
+    FRONTEND_JS_ENTRY_PATH: envObj.frontendJsEntryPath ?? undefined,
+    /** @type {string} */
+    FRONTEND_JS_DIST_PATH: envObj.frontendJsDistPath ?? undefined,
 }

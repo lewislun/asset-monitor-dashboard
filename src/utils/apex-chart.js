@@ -2,6 +2,15 @@ import Decimal from 'decimal.js'
 
 /**
  * @typedef {import('apexcharts').ApexOptions} ApexOptions
+ * 
+ * @typedef XYDataExtraOpts
+ * @property {object} [xAxisType=category]
+ * @property {string} [sortField]
+ * @property {SortOrder} [sortOrder=desc]
+ * 
+ * @typedef LabelValueDataExtraOpts
+ * @property {string} [sortField]
+ * @property {SortOrder} [sortOrder=desc]
  */
 
 /**
@@ -14,15 +23,42 @@ export const SortOrder = {
 
 /**
  * @param {object[]} dataArr
- * @param {string} xField
- * @param {string} yField
- * @param {object} [opts={}]
- * @param {object} [opts.xAxisType=category]
- * @param {string} [opts.sortField]
- * @param {SortOrder} [opts.sortOrder=desc]
+ * @param {string} labelField
+ * @param {string} valueField
+ * @param {LabelValueDataExtraOpts} [opts={}]
  * @returns {ApexOptions}
  */
-export function parseApexXYData(dataArr, xField, yField, opts = {}) {
+export function parsePieChartOpts(dataArr, labelField, valueField, opts = {}) {
+	return {
+		...parseLabelValueData(dataArr, labelField, valueField, opts),
+		chart: { type: 'pie' },
+		legend: { show: false },
+	}
+}
+
+/**
+ * @param {object[]} dataArr
+ * @param {string} xField
+ * @param {string} yField
+ * @param {LabelValueDataExtraOpts} [opts={}]
+ * @returns {ApexOptions}
+ */
+export function parseTreemapOpts(dataArr, xField, yField, opts = {}) {
+	return {
+		...parseXYData(dataArr, xField, yField, opts),
+		chart: { type: 'treemap' },
+		legend: { show: false },
+	}
+}
+
+/**
+ * @param {object[]} dataArr
+ * @param {string} xField
+ * @param {string} yField
+ * @param {XYDataExtraOpts} [opts={}]
+ * @returns {ApexOptions}
+ */
+export function parseXYData(dataArr, xField, yField, opts = {}) {
 	if (opts?.sortField) sortArr(dataArr, opts.sortField, opts.sortOrder)
 	return {
 		series: [{
@@ -37,12 +73,10 @@ export function parseApexXYData(dataArr, xField, yField, opts = {}) {
  * @param {object[]} dataArr
  * @param {string} labelField
  * @param {string} valueField
- * @param {object} [opts={}]
- * @param {string} [opts.sortField]
- * @param {SortOrder} [opts.sortOrder=desc]
+ * @param {LabelValueDataExtraOpts} [opts={}]
  * @returns {ApexOptions}
  */
-export function parseApexLabelValueData(dataArr, labelField, valueField, opts = {}) {
+export function parseLabelValueData(dataArr, labelField, valueField, opts = {}) {
 	if (opts?.sortField) sortArr(dataArr, opts.sortField, opts.sortOrder)
 	return {
 		series: dataArr.map(item => parseValue(item[valueField])),

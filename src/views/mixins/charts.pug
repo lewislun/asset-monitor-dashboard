@@ -8,10 +8,13 @@ mixin chartLongCard(title)
 		.title= title
 		block
 
+mixin apexChart(chartOpts)
+	.chart.apex-chart(data-chart-opts=chartOpts)
+
 mixin apexPieChart(data)
 	- chainCount = chainCount === undefined? 0 : chainCount
 	- const chartId = `chart-${chainCount++}`
-	.chart(id=chartId)
+	.chart(id=chartId data-chart-opts=data)
 		script.
 			data = !{JSON.stringify(data)}
 			chartId = '#!{chartId}'

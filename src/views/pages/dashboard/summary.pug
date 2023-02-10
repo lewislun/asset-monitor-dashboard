@@ -6,10 +6,10 @@ block body
 	.container
 		.row
 			+chartCard('Total Value by State')
-				+apexPieChart(totalValueByStateData)
+				+apexChart(totalValueByStateOpts)
 			+chartCard('Total Value by Chain')
-				+apexPieChart(totalValueByChainData)
+				+apexChart(totalValueByChainOpts)
 			+chartCard('Total Value by Wallet Type')
-				+apexPieChart(totalValueByWalletTypeData)
+				+apexChart(totalValueByWalletTypeOpts)
 			+chartLongCard('Total Value by Code')
-				+apexTreemap(totalValueByCodeData)
+				+apexChart(totalValueByCodeOpts)

@@ -1,2 +1,2 @@
 export * from './logger.js'
-export * from './chart-data.js'
+export * as apexChart from './apex-chart.js'
