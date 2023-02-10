@@ -1,7 +1,7 @@
 import express from 'express'
 import { analytics } from 'asset-monitor'
 
-import { parseApexLabelValueData } from '../utils/index.js'
+import { parseApexLabelValueData, parseApexXYData } from '../utils/index.js'
 import env from '../../env.js'
 
 const router = express.Router()
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 	res.render('pages/dashboard/summary', {
 		env,
 		totalValueByStateData: parseApexLabelValueData(totalValueByStateData, 'state', 'usdValue'),
-		totalValueByCodeData: parseApexLabelValueData(totalValueByCodeData, 'code', 'usdValue'),
+		totalValueByCodeData: parseApexXYData(totalValueByCodeData, 'code', 'usdValue'),
 		totalValueByChainData: parseApexLabelValueData(totalValueByChainData, 'chain', 'usdValue')
 	})
 })

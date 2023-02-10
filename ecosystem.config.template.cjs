@@ -8,7 +8,7 @@ module.exports = {
 		},
 		{
 			name: 'asset-monitor-dashboard-watch',
-			script: 'node --require=suppress-experimental-warnings ./scripts/build-scss.js && node --require=suppress-experimental-warnings ./scripts/start.js',
+			script: 'node --require=suppress-experimental-warnings ./scripts/dev.js',
 			max_memory_restart: '256M',
 			combine_logs: true,
 			watch: ['src', 'scripts'],

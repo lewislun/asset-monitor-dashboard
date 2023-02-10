@@ -1,17 +1,37 @@
 mixin chartCard(title)
-	.col-12.col-md-6.col-lg-4
-		h5= title
+	.chart-card.col-12.col-md-6.col-lg-4
+		.title= title
+		block
+
+mixin chartLongCard(title)
+	.chart-card.col-12
+		.title= title
 		block
 
 mixin apexPieChart(data)
 	- chainCount = chainCount === undefined? 0 : chainCount
 	- const chartId = `chart-${chainCount++}`
-	div(id=chartId)
-	script.
-		data = !{JSON.stringify(data)}
-		chartId = '#!{chartId}'
-		chartOpts = {
-			...data,
-			chart: { type: 'pie' }
-		}
-		new ApexCharts(document.querySelector(chartId), chartOpts).render()
+	.chart(id=chartId)
+		script.
+			data = !{JSON.stringify(data)}
+			chartId = '#!{chartId}'
+			chartOpts = {
+				...data,
+				chart: { type: 'pie' },
+				legend: { show: false },
+			}
+			new ApexCharts(document.querySelector(chartId), chartOpts).render()
+
+mixin apexTreemap(data)
+	- chainCount = chainCount === undefined? 0 : chainCount
+	- const chartId = `chart-${chainCount++}`
+	.chart(id=chartId)
+		script.
+			data = !{JSON.stringify(data)}
+			chartId = '#!{chartId}'
+			chartOpts = {
+				...data,
+				chart: { type: 'treemap' },
+				legend: { show: false },
+			}
+			new ApexCharts(document.querySelector(chartId), chartOpts).render()

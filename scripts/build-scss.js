@@ -9,12 +9,12 @@ import { createLogger } from '../index.js'
 
 const logger = createLogger('sass')
 
-async function writeFile(outputPath, content) {
+function writeFile(outputPath, content) {
     const dir = path.dirname(outputPath)
     if (!fs.existsSync(dir)) {
-        await fs.promises.mkdir(dir, { recursive: true })
+        fs.mkdirSync(dir, { recursive: true })
     }
-    return fs.promises.writeFile(outputPath, content)
+    return fs.writeFileSync(outputPath, content)
 }
 
 // Paths
@@ -25,10 +25,10 @@ const sourceMapDistPath = distPath + '.map'
 
 // Compile SCSS
 logger.info(`Building SCSS from ${entryPath}.`)
-const result = await sass.compileAsync(entryPath, { sourceMap: true })
+const result = sass.compile(entryPath, { sourceMap: true })
 
 // Write to files
 logger.info(`Writing CSS to ${distPath}.`)
-await writeFile(distPath, result.css)
+writeFile(distPath, result.css)
 logger.info(`Writing CSS source map to ${sourceMapDistPath}.`)
-await writeFile(sourceMapDistPath, result.sourceMap.mappings)
+writeFile(sourceMapDistPath, result.sourceMap.mappings)

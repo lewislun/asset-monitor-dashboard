@@ -14,6 +14,7 @@
   "author": "Lewis Cheung",
   "license": "MIT",
   "dependencies": {
+    "apexcharts": "^3.37.0",
     "asset-monitor": "git+ssh://git@github.com:lewislun/asset-monitor.git#1.1.0",
     "decimal.js": "^10.4.3",
     "express": "^4.18.2",

@@ -1,26 +1,32 @@
 import Decimal from 'decimal.js'
 
-// /**
-//  * @param {object[]} dataArr
-//  * @param {object} opts
-//  * @param {string} opts.xFieldName
-//  * @param {string} [opts.yFieldName]
-//  * 
-//  */
-// export function parseApexChartData(dataArr, opts) {
-// 	return {
-// 		series: [{
-// 			data: dataArr.map(item => ({ x: parseValue(item[opts.xFieldName]), y: parseValue(item[opts.yFieldName]) })),
-// 		}],
-// 		xaxis: { type: 'category' },
-// 	}
-// }
+/**
+ * @typedef {import('apexcharts').ApexOptions} ApexOptions
+ */
+
+/**
+ * @param {object[]} dataArr
+ * @param {string} xFieldName
+ * @param {string} yFieldName
+ * @param {object} [opts={}]
+ * @param {object} [xAxisType=category]
+ * @returns {ApexOptions}
+ */
+export function parseApexXYData(dataArr, xFieldName, yFieldName, opts = {}) {
+	return {
+		series: [{
+			data: dataArr.map(item => ({ x: parseValue(item[xFieldName]), y: parseValue(item[yFieldName]) })),
+		}],
+		xaxis: { type: opts?.xAxisType ?? 'category' },
+	}
+}
 
 /**
  * Data for Pie/Donuts/RadialBars.
  * @param {object[]} dataArr
  * @param {string} labelFieldName
  * @param {string} valueFieldName
+ * @returns {}
  */
 export function parseApexLabelValueData(dataArr, labelFieldName, valueFieldName) {
 	return {

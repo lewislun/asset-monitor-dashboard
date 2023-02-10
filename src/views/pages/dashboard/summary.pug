@@ -7,7 +7,7 @@ block body
 		.row
 			+chartCard('Total Value by State')
 				+apexPieChart(totalValueByStateData)
-			+chartCard('Total Value by Code')
-				+apexPieChart(totalValueByCodeData)
 			+chartCard('Total Value by Chain')
 				+apexPieChart(totalValueByChainData)
+			+chartLongCard('Total Value by Code')
+				+apexTreemap(totalValueByCodeData)
