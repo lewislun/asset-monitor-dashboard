@@ -5,6 +5,7 @@ import Decimal from 'decimal.js'
  * 
  * @typedef XYDataExtraOpts
  * @property {object} [xAxisType=category]
+ * @property {string} [nameField]
  * @property {string} [sortField]
  * @property {SortOrder} [sortOrder=desc]
  * 
@@ -37,33 +38,63 @@ export function parsePieChartOpts(dataArr, labelField, valueField, opts = {}) {
 }
 
 /**
- * @param {object[]} dataArr
+ * @param {object[]} seriesData
  * @param {string} xField
  * @param {string} yField
  * @param {LabelValueDataExtraOpts} [opts={}]
  * @returns {ApexOptions}
  */
-export function parseTreemapOpts(dataArr, xField, yField, opts = {}) {
+export function parseTreemapOpts(seriesData, xField, yField, opts = {}) {
 	return {
-		...parseXYData(dataArr, xField, yField, opts),
+		...parseXYData([seriesData], xField, yField, opts),
 		chart: { type: 'treemap' },
 		legend: { show: false },
 	}
 }
 
 /**
- * @param {object[]} dataArr
+ * @param {object[][]} seriesDataArr
  * @param {string} xField
  * @param {string} yField
  * @param {XYDataExtraOpts} [opts={}]
  * @returns {ApexOptions}
  */
-export function parseXYData(dataArr, xField, yField, opts = {}) {
-	if (opts?.sortField) sortArr(dataArr, opts.sortField, opts.sortOrder)
+export function parseAreaChartOpts(seriesDataArr, xField, yField, opts = {}) {
 	return {
-		series: [{
-			data: dataArr.map(item => ({ x: parseValue(item[xField]), y: parseValue(item[yField]) })),
-		}],
+		...parseXYData(seriesDataArr, xField, yField, opts),
+		chart: {
+			type: 'area',
+			stacked: true,
+		},
+		legend: { show: false },
+		stroke: { curve: 'smooth' },
+		dataLabels: { enabled: false },
+		fill: {
+			type: 'gradient',
+			gradient: {
+				opacityFrom: 0.6,
+				opacityTo: 0.8,
+			}
+		},
+	}
+}
+
+/**
+ * @param {object[][]} seriesDataArr
+ * @param {string} xField
+ * @param {string} yField
+ * @param {XYDataExtraOpts} [opts={}]
+ * @returns {ApexOptions}
+ */
+export function parseXYData(seriesDataArr, xField, yField, opts = {}) {
+	if (opts?.sortField) {
+		seriesDataArr = seriesDataArr.map(seriesData => sortArr(seriesData, opts.sortField, opts.sortOrder))
+	}
+	return {
+		series: seriesDataArr.map(seriesData => ({
+			name: seriesData[0]?.[opts?.nameField],
+			data: seriesData.map(item => ({ x: parseValue(item[xField]), y: parseValue(item[yField]) })),
+		})),
 		xaxis: { type: opts?.xAxisType ?? 'category' },
 	}
 }

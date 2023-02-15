@@ -7,9 +7,11 @@ block body
 		.row
 			+chartCard('Total Value by State')
 				+apexChart(totalValueByStateOpts)
-			+chartCard('Total Value by Chain')
-				+apexChart(totalValueByChainOpts)
 			+chartCard('Total Value by Wallet Type')
 				+apexChart(totalValueByWalletTypeOpts)
+			+chartLongCard('Net Flow by Group over time')
+				+apexChart(netFlowOverTimeData)
+			+chartLongCard('Total Value by Chain')
+				+apexChart(totalValueByChainOpts)
 			+chartLongCard('Total Value by Code')
 				+apexChart(totalValueByCodeOpts)
