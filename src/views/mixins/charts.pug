@@ -10,31 +10,3 @@ mixin chartLongCard(title)
 
 mixin apexChart(chartOpts)
 	.chart.apex-chart(data-chart-opts=chartOpts)
-
-mixin apexPieChart(data)
-	- chainCount = chainCount === undefined? 0 : chainCount
-	- const chartId = `chart-${chainCount++}`
-	.chart(id=chartId data-chart-opts=data)
-		script.
-			data = !{JSON.stringify(data)}
-			chartId = '#!{chartId}'
-			chartOpts = {
-				...data,
-				chart: { type: 'pie' },
-				legend: { show: false },
-			}
-			new ApexCharts(document.querySelector(chartId), chartOpts).render()
-
-mixin apexTreemap(data)
-	- chainCount = chainCount === undefined? 0 : chainCount
-	- const chartId = `chart-${chainCount++}`
-	.chart(id=chartId)
-		script.
-			data = !{JSON.stringify(data)}
-			chartId = '#!{chartId}'
-			chartOpts = {
-				...data,
-				chart: { type: 'treemap' },
-				legend: { show: false },
-			}
-			new ApexCharts(document.querySelector(chartId), chartOpts).render()

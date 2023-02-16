@@ -65,6 +65,7 @@ export function parseAreaChartOpts(seriesDataArr, xField, yField, opts = {}) {
 		chart: {
 			type: 'area',
 			stacked: true,
+			stackType: 'normal',
 		},
 		legend: { show: false },
 		stroke: { curve: 'smooth' },
