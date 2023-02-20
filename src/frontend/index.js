@@ -1,1 +1,2 @@
-import './apex-chart.js'
+import './js/index.js'
+import './scss/index.scss'

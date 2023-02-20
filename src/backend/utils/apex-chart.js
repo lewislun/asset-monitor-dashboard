@@ -138,7 +138,9 @@ function sortArr(arr, field, order = SortOrder.DESC) {
 function parseValue(value) {
 	switch (true) {
 		case value instanceof Decimal:
-			return value.toNumber()
+			return value.toDecimalPlaces(0).toNumber()
+		case typeof value === 'number':
+			return Math.round(value)
 	}
 	return value
 }

@@ -2,16 +2,16 @@ module.exports = {
 	apps : [
 		{
 			name: 'asset-monitor-dashboard',
-			script: 'node --require=suppress-experimental-warnings ./scripts/entry.js start',
+			script: 'node --require=suppress-experimental-warnings .',
 			max_memory_restart: '256M',
 			combine_logs: true,
 		},
 		{
-			name: 'asset-monitor-dashboard-watch',
-			script: 'node --require=suppress-experimental-warnings ./scripts/entry.js dev',
+			name: 'asset-monitor-dashboard-dev',
+			script: 'npm run build && node --require=suppress-experimental-warnings .',
 			max_memory_restart: '256M',
 			combine_logs: true,
-			watch: ['src', 'scripts'],
+			watch: ['src'],
 		},
 	],
 }

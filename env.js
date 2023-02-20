@@ -3,7 +3,7 @@ import path from 'path'
 
 import yaml from 'js-yaml'
 
-import { createLogger } from './src/utils/index.js'
+import { createLogger } from './src/backend/utils/index.js'
 
 // load file
 const logger = createLogger('env')
@@ -18,14 +18,12 @@ export default {
     /** @type {number} */
     PORT: envObj.port ?? 3000,
     /** @type {string} */
-    PUBLIC_FOLDER_PATH: envObj.publicFolderPath ?? 'public',
+    PUBLIC_FOLDER_PATH: envObj.publicFolderPath ?? undefined,
 
     /** @type {string} */
-    SCSS_ENTRY_PATH: envObj.scssEntryPath ?? undefined,
+    DIST_FOLDER_PATH: envObj.distFolderPath ?? undefined,
     /** @type {string} */
-    SCSS_DIST_PATH: envObj.scssDistPath ?? undefined,
+    FRONTEND_JS_DIST_FILENAME: envObj.frontendJsDistFilename ?? undefined,
     /** @type {string} */
-    FRONTEND_JS_ENTRY_PATH: envObj.frontendJsEntryPath ?? undefined,
-    /** @type {string} */
-    FRONTEND_JS_DIST_PATH: envObj.frontendJsDistPath ?? undefined,
+    CSS_DIST_FILENAME: envObj.cssDistFilename ?? undefined,
 }

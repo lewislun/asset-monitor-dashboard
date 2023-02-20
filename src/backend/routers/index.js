@@ -1,6 +1,6 @@
 import express from 'express'
 
-import env from '../../env.js'
+import env from '../../../env.js'
 import dashboardRouter from './dashboard.js'
 
 // Routes

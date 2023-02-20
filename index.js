@@ -1,1 +1,3 @@
-export * from './src/index.js'
+import { backend } from './src/index.js'
+
+backend.start()
