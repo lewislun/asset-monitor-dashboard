@@ -12,21 +12,28 @@ const logger = createLogger('auth')
 passport.use('local', new Strategy((username, password, cb) => {
 	logger.debug(`Logging in as '${username}'.`)
 	User.login(username, password)
-		.then(user => { console.log(user); cb(null, user);})
+		.then(user => cb(null, user))
 		.catch(err => cb(err))
 }))
 
-// passport.serializeUser(function(user, cb) {
-// 	process.nextTick(function() {
-// 		cb(null, { id: user.id, username: user.name })
-// 	})
-// })
+// Serialize user object to store in session
+passport.serializeUser((user, cb) => {
+	process.nextTick(() => {
+		cb(null, { id: user.id, username: user.name })
+	})
+})
 
-// passport.deserializeUser(function(user, cb) {
-// 	process.nextTick(function() {
-// 		return cb(null, user)
-// 	})
-// })
+// Deserialize user from session
+passport.deserializeUser((sessionUser, cb) => {
+	process.nextTick(async () => {
+		try {
+			const user = await User.query().findById(sessionUser.id)
+			cb(null, user)
+		} catch (err) {
+			cb(err)
+		}
+	})
+})
 
 const router = express.Router()
 
@@ -41,12 +48,7 @@ router.get('/login', async (req, res) => {
 // POST login
 router.post(
 	'/login',
-	passport.authenticate('local', { failureRedirect: 'login', failureMessage: true }),
-	(req, res) => {
-		logger.debug(`Successfully logged in as '${req.body.username}'`)
-		console.log(req.user)
-		res.redirect('/')
-	}
+	passport.authenticate('local', { successReturnToOrRedirect: '/', failureRedirect: 'login', failureMessage: true }),
 )
 
 

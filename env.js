@@ -21,6 +21,8 @@ export default {
     PUBLIC_FOLDER_PATH: envObj.publicFolderPath ?? undefined,
     /** @type {string} */
     SESSION_SECRET: envObj.sessionSecret ?? undefined,
+    /** @type {bool} */
+    IS_DEVELOPMENT: envObj.isDevelopment ?? false,
 
     /** @type {string} */
     DIST_FOLDER_PATH: envObj.distFolderPath ?? undefined,

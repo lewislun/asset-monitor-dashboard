@@ -5,7 +5,7 @@ import Knex from 'knex'
 import express from 'express'
 import session from 'express-session'
 import { Model } from 'objection'
-// import passport from 'passport'
+import passport from 'passport'
 
 import env from '../../env.js'
 import knexfile from '../../knexfile.js'
@@ -21,23 +21,23 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const knex = Knex(knexfile)
 Model.knex(knex)
 
+// Parsers
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+
 // Session
 app.use(session({
 	secret: env.SESSION_SECRET,
 	resave: false,
-	saveUninitialized: true,
-	cookie: { secure: true },
+	saveUninitialized: false,
+	cookie: { secure: !env.IS_DEVELOPMENT, maxAge: 3600 * 1000 },
 }))
 
 // Auth by session
-// app.use(passport.authenticate('session'))
+app.use(passport.session())
 
 // HTTP logs
 app.use(morganMiddleware)
-
-// Parser
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
 
 // Views
 app.set('views', path.resolve(__dirname, './views'))
