@@ -4,7 +4,7 @@ html(lang='en')
 		meta(charset='utf-8')
 		meta(name='viewport', content='with=device-width, initial-scale=1, maximum-scale=1, user-scalable=no')
 		title #{env.APP_NAME}
-		link(rel='stylesheet', href=(env.DIST_FOLDER_PATH + env.CSS_DIST_FILENAME))
+		link(rel='stylesheet', href=`/${env.DIST_FOLDER_PATH + env.CSS_DIST_FILENAME}`)
 		//- link(rel='icon' type='image/ico' href=`${env.PUBLIC_PATH}favicon.ico` size='256')
 		//- link(rel='preconnect' href='https://fonts.googleapis.com')
 		//- link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
@@ -20,4 +20,4 @@ html(lang='en')
 			integrity='sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2'
 			crossorigin='anonymous'
 		)
-		script(type='module' src=(env.DIST_FOLDER_PATH + env.FRONTEND_JS_DIST_FILENAME))
+		script(type='module' src=`/${env.DIST_FOLDER_PATH + env.FRONTEND_JS_DIST_FILENAME}`)

@@ -1,11 +1,6 @@
+/** @type {import('knex').Knex.Config} */
 const config = {
 	client: 'pg',
-	migrations: {
-		directory: './src/db/migrations',
-	},
-	seeds: {
-		directory: './src/db/seeds',
-	},
 	connection: {
 		host: 'localhost',
 		user: 'postgres',

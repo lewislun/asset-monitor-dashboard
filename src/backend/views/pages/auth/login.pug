@@ -1,0 +1,10 @@
+extends ../../layouts/base.pug
+
+block body
+	.page-auth-login.container
+		form(method='POST')
+			label(for='username') Username
+			input(type='text' name='username' placeholder='Username' required)
+			label(for='password') Password
+			input(type='password' name='password' placeholder='Password' required)
+			button(type='submit') Login

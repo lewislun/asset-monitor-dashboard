@@ -19,6 +19,8 @@ export default {
     PORT: envObj.port ?? 3000,
     /** @type {string} */
     PUBLIC_FOLDER_PATH: envObj.publicFolderPath ?? undefined,
+    /** @type {string} */
+    SESSION_SECRET: envObj.sessionSecret ?? undefined,
 
     /** @type {string} */
     DIST_FOLDER_PATH: envObj.distFolderPath ?? undefined,
