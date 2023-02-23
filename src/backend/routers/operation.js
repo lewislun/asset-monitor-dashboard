@@ -1,5 +1,5 @@
 import express from 'express'
-import { UserRole } from 'asset-monitor'
+import { UserRole, AssetGroup } from 'asset-monitor'
 
 import * as middlewares from '../middlewares/index.js'
 
@@ -7,7 +7,8 @@ const router = express.Router()
 router.use(middlewares.checkAuth({ permittedRoles: [ UserRole.OWNER, UserRole.OPERATOR ] }))
 
 router.get('/', async (req, res) => {
-	res.render('pages/operation')
+	const groups = await AssetGroup.query()
+	res.render('pages/operation', { groups })
 })
 
 export default router

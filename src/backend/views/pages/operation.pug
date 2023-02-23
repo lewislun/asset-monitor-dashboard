@@ -1,4 +1,24 @@
 extends ../layouts/base.pug
 
+mixin operationCard(titlepostPath, submitBtnText = 'Submit')
+	.operation-card.col-12.col-md-6.col-lg-4
+		form(action=postPath method='POST')
+			h5= title
+			block
+			button(type='submit')= submitBtnText
+
+mixin groupSelect(name, groups, label, blankOptionText = undefined)
+	label(for=name)= label
+	select(name=name)
+		if blankOptionText
+			option(selected value)= blankOptionText
+		each group of groups
+			option(value=group.id)= group.name
+
 block body
 	.page-operation.container
+		.row
+			+operationCard('Record New Asset Flow', './add-flow')
+				+groupSelect('from_group_id', groups, 'From: ', 'External Source')
+				+groupSelect('to_group_id', groups, 'To: ', 'External Destination')
+				input(type='number' name='amount' required)
