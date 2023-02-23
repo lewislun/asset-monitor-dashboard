@@ -3,7 +3,6 @@ import passport from 'passport'
 import { Strategy } from 'passport-local'
 import { User } from 'asset-monitor'
 
-import env from '../../../env.js'
 import { createLogger } from '../utils/index.js'
 
 const logger = createLogger('auth')
@@ -42,7 +41,7 @@ router.get('/', (req, res) => res.redirect(req.originalUrl + '/login'))
 
 // Login Page
 router.get('/login', async (req, res) => {
-	res.render('pages/auth/login', { env })
+	res.render('pages/login')
 })
 
 // POST login

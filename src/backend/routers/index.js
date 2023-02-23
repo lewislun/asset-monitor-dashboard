@@ -5,8 +5,16 @@ import authRouter from './auth.js'
 import dashboardRouter from './dashboard.js'
 import operationRouter from './operation.js'
 
-// Routes
 const rootRouter = express.Router()
+
+// Common variables for views
+rootRouter.use((req, res, next) => {
+	res.locals = res.locals ?? {}
+	res.locals.env = env
+	next()
+})
+
+// Routes
 rootRouter.use('/public', express.static(env.PUBLIC_FOLDER_PATH))
 rootRouter.use('/auth', authRouter)
 rootRouter.use('/dashboard', dashboardRouter)

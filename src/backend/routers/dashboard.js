@@ -2,7 +2,6 @@ import express from 'express'
 import { analytics } from 'asset-monitor'
 
 import { apexChart } from '../utils/index.js'
-import env from '../../../env.js'
 
 const router = express.Router()
 
@@ -24,7 +23,6 @@ router.get('/', async (req, res) => {
 	])
 
 	res.render('pages/dashboard/summary', {
-		env,
 		// totalValueByStateOpts: apexChart.parsePieChartOpts(totalValueByStateData.flat(1), 'state', 'usdValue', { sortField: 'usdValue' }),
 		// totalValueByCodeOpts: apexChart.parseTreemapOpts(totalValueByCodeData.flat(1), 'code', 'usdValue', { sortField: 'usdValue' }),
 		// totalValueByChainOpts: apexChart.parseTreemapOpts(totalValueByChainData.flat(1), 'chain', 'usdValue', { sortField: 'usdValue' }),

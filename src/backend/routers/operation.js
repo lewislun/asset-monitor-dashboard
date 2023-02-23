@@ -7,7 +7,7 @@ const router = express.Router()
 router.use(middlewares.checkAuth({ permittedRoles: [ UserRole.OWNER, UserRole.OPERATOR ] }))
 
 router.get('/', async (req, res) => {
-	res.send('YO')
+	res.render('pages/operation')
 })
 
 export default router

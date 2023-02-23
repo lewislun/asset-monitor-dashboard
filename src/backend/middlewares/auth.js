@@ -8,7 +8,6 @@ import { UserRole } from 'asset-monitor'
  */
 export function checkAuth(opts = {}) {
 	return (req, res, next) => {
-		console.log(req.user, opts.permittedRoles)
 		// check if logged in
 		if (!req.user) {
 			req.session.returnTo = req.originalUrl
