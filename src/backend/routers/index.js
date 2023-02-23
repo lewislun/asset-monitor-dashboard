@@ -15,7 +15,7 @@ rootRouter.use((req, res, next) => {
 })
 
 // Routes
-rootRouter.use('/public', express.static(env.PUBLIC_FOLDER_PATH))
+rootRouter.use('/public', express.static(env.PUBLIC_FOLDER_DIR))
 rootRouter.use('/auth', authRouter)
 rootRouter.use('/dashboard', dashboardRouter)
 rootRouter.use('/operation', operationRouter)

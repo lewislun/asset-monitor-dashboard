@@ -6,6 +6,7 @@ import express from 'express'
 import session from 'express-session'
 import { Model } from 'objection'
 import passport from 'passport'
+import connectSqlite3 from 'connect-sqlite3'
 
 import env from '../../env.js'
 import knexfile from '../../knexfile.js'
@@ -26,11 +27,12 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 // Session
+const SqliteStore = connectSqlite3(session)
 app.use(session({
 	secret: env.SESSION_SECRET,
 	resave: false,
 	saveUninitialized: false,
-	cookie: { secure: !env.IS_DEVELOPMENT, maxAge: 3600 * 1000 },
+	store: new SqliteStore({ db: env.SESSION_SQLITE_FILENAME, dir: env.SESSION_SQLITE_DIR })
 }))
 
 // Auth by session

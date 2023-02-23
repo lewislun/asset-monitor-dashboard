@@ -13,3 +13,8 @@ dist
 # environment config
 /env*.yaml
 !/env.template.yaml
+
+# SQLite
+*.db
+*.sqlite
+*.sqlite3

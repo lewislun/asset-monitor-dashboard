@@ -18,14 +18,16 @@ export default {
     /** @type {number} */
     PORT: envObj.port ?? 3000,
     /** @type {string} */
-    PUBLIC_FOLDER_PATH: envObj.publicFolderPath ?? undefined,
+    PUBLIC_FOLDER_DIR: envObj.publicFolderDir ?? undefined,
+    /** @type {string} */
+    SESSION_SQLITE_DIR: envObj.sessionSqliteDir ?? undefined,
+    /** @type {string} */
+    SESSION_SQLITE_FILENAME: envObj.sessionSqliteFilename ?? undefined,
     /** @type {string} */
     SESSION_SECRET: envObj.sessionSecret ?? undefined,
-    /** @type {bool} */
-    IS_DEVELOPMENT: envObj.isDevelopment ?? false,
 
     /** @type {string} */
-    DIST_FOLDER_PATH: envObj.distFolderPath ?? undefined,
+    DIST_FOLDER_DIR: envObj.distFolderDir ?? undefined,
     /** @type {string} */
     FRONTEND_JS_DIST_FILENAME: envObj.frontendJsDistFilename ?? undefined,
     /** @type {string} */
