@@ -2,23 +2,26 @@ import expresss from 'express'
 import { UserRole } from 'asset-monitor'
 
 /**
- * @param {expresss.Request} req
- * @param {expresss.Response} res
- * @param {expresss.NextFunction} next
- */
-export function ensureLoggedIn(req, res, next) {
-	if (!req.user) return res.redirect('/auth/login')
-	next()
-}
-
-/**
- * @param {UserRole[]} permittedRoles
+ * @param {object} [opts={}]
+ * @param {UserRole[]} [opts.permittedRoles=[]]
  * @returns {expresss.Handler}
  */
-export function restrictRole(permittedRoles = []) {
+export function checkAuth(opts = {}) {
 	return (req, res, next) => {
-		if (!req.user) return res.redirect('/auth/login')
-		if (!permittedRoles.includes(req.user.role)) return res.status(403).send()
+		console.log(req.user, opts.permittedRoles)
+		// check if logged in
+		if (!req.user) {
+			req.session.returnTo = req.originalUrl
+			console.log('url', req.originalUrl)
+			res.redirect('/auth/login')
+			return
+		}
+		
+		// check roles
+		if (opts?.permittedRoles && !opts.permittedRoles.includes(req.user?.role)) {
+			return res.status(403).send()
+		}
+
 		next()
 	}
 }
